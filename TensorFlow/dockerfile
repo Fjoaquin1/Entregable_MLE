@@ -1,0 +1,14 @@
+FROM python:3.9
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY scaler.pkl .
+COPY best_model.h5 .
+
+COPY main.py .
+
+ENTRYPOINT ["python", "main.py", "Pulsar_cleaned.csv", "best_model.h5", "scaler.pkl"]
